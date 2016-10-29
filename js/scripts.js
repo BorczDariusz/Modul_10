@@ -21,11 +21,15 @@ $(function() {
     		var $column = $('<div>').addClass('column');
 			var $columnTitle = $('<h2>').addClass('column-title').text(self.name);
 			var $columnCardList = $('<ul>').addClass('column-card-list');
-			var $columnDelete = $('<button>').addClass('btn-delete').text('x');
+			var $columnDelete = $('<button>').addClass('btn-delete').text('Delete column');
 			var $columnAddCard = $('<button>').addClass('add-card').text('Create new card');	
 
 			$columnDelete.click(function() {
-        		self.removeColumn();
+				if (confirm('Are you sure you want to delete this column: ' + '"' + self.name + '"' + ' ?')) {
+    				self.removeColumn();
+				} else {
+    				return false
+				}
 			});
 
 			$columnAddCard.click(function() {
@@ -63,7 +67,11 @@ $(function() {
 			var $cardDelete = $('<button>').addClass('btn-delete').text('x');
 
 			$cardDelete.click(function(){
-        		self.removeCard();
+        		if (confirm('Are you sure you want to delete this card: ' + '"' + self.description + '"' + ' ?')) {
+    				self.removeCard();
+				} else {
+    				return false
+				}
 			});
 
 			$card.append($cardDelete)
@@ -110,9 +118,11 @@ $(function() {
 	board.addColumn(doingColumn);
 	board.addColumn(doneColumn);
 
-	var card1 = new Card('New request');
-	var card2 = new Card('Create Kanban table');
+	var card1 = new Card('');
+	var card2 = new Card('New request');
+	var card3 = new Card('Create Kanban table');
 
-	todoColumn.addCard(card1);
-	doingColumn.addCard(card2);
+	todoColumn.addCard(card2);
+	doingColumn.addCard(card3);
 });
+
